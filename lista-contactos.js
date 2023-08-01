@@ -1,117 +1,108 @@
-function agregar(contacto) {
-  for (let i = 0; i < contacto.length; i++) {
-    contacto.push([i]);
+class Persona{
+
+  static contadorPersonas = 0;
+  
+  constructor(nombres, apellido, telefono, ubicacion){
+      this._id = ++Persona.contadorPersonas;
+      this._nombre = nombres;
+      this._apellido = apellido;
+      this._telefono = telefono;
+      this._ubicacion = ubicacion;
   }
-  console.log(
-    "Agregando contactos nuevo: " + "\n___________________________________"
-  );
-}
 
-function eliminar(){
-  contacto.push(contacto);
-}
+  get id(){
+      return this._id;
+  }
 
+  set id(id){
+      this._id = id;
+  }
 
-function mostrar() {
-  for (let i = 0; i < contacto.length; i++) {
-    console.log(contacto[i].datosCompletos);
+  get nombres(){
+      return this._nombre;
+  }
+
+  set nombres(nombres){
+      this._nombre = nombres;
+  }
+
+  get apellido(){
+      return this._apellido;
+  }
+
+  set apellido(apellido){
+      this._apellido = apellido;
+  }
+
+  get telefono(){
+      return this._telefono;
+  }
+
+  set telefono(telefono){
+      this._telefono = telefono;
+  }
+
+  get ubicacion(){
+      return this._ubicacion;
+  }
+
+  set ubicacion(ubicacion){
+      this._ubicacion = ubicacion;
+  }
+
+  toString(){
+      return `Contacto n°: ${this._id}, Nombre: ${this._nombre}, Apellido: ${this._apellido}, Telefono ${this._telefono}, Direccion: ${this._ubicacion} `;
   }
 }
 
-console.log(
-  "Bienvenidos a la lista de contactos" +
-    "\n___________________________________"
-);
-let contacto = [
-  {
-    id: 1,
-    nombre: "Cesar",
-    apellido: "Trujillo",
-    telefono: 321654987,
-    ubicaciones: {
-      ciudad: "Armenia",
-      direccion: "Mz 4 Cs 144",
-    },
-    get datosCompletos() {
-      return (
-        "Contacto N°: " +
-        this.id +
-        "\nNombre: " +
-        this.nombre +
-        "\nApellido: " +
-        this.apellido +
-        "\nTelefono: " +
-        this.telefono +
-        "\nCiudad: " +
-        this.ubicaciones.ciudad +
-        "\nDireccion: " +
-        this.ubicaciones.direccion +
-        "\n___________________________________"
-      );
-    },  
-  },
+class Contacto{
+  static contadorContactos = 0;
 
-  {
-    id: 2,
-    nombre: "Henry",
-    apellido: "Trujillo",
-    telefono: 321654,
-    ubicaciones: {
-      ciudad: "Armenia",
-      direccion: "Mz 4 Cs 144",
-    },
-    get datosCompletos() {
-      return (
-        "Contacto N°: " +
-        this.id +
-        "\nNombre: " +
-        this.nombre +
-        "\nApellido: " +
-        this.apellido +
-        "\nTelefono: " +
-        this.telefono +
-        "\nCiudad: " +
-        this.ubicaciones.ciudad +
-        "\nDireccion: " +
-        this.ubicaciones.direccion +
-        "\n___________________________________"
-      );
-    },
-  },
-];
+  static get MAX_CONTACTOS(){
+      return 5;
+  }
 
-mostrar();
+  constructor(){
+      this._idContactos = ++Contacto.contadorContactos;
+      this._contactos = [];
+  }
 
-agregar(
-  (contacto[2] = {
-    id: 3,
-    nombre: "Andy",
-    apellido: "Trujillo",
-    telefono: 321456,
-    ubicaciones: {
-      ciudad: "Armenia",
-      direccion: "Mz 4 Cs 144",
-    },
-    get datosCompletos() {
-      return (
-        "Contacto N°: " +
-        this.id +
-        "\nNombre: " +
-        this.nombre +
-        "\nApellido: " +
-        this.apellido +
-        "\nTelefono: " +
-        this.telefono +
-        "\nCiudad: " +
-        this.ubicaciones.ciudad +
-        "\nDireccion: " +
-        this.ubicaciones.direccion +
-        "\n___________________________________"
-      );
-    },
-  })
-);
+  get idContactos(){
+      return this._idContactos
+  }
 
-mostrar();
-eliminar(2);
-mostrar();
+  agregarContacto(nuevoContacto){
+      if(this._contactos.length < Contacto.MAX_CONTACTOS){
+          this._contactos.push(nuevoContacto);
+      }else{
+          console.log('No se pueden agregar mas contactos');
+      }
+  }
+
+  mostrarContactos(){
+      let contactoPersona = '';
+      for(let contacto of this._contactos){
+          contactoPersona += '\n{' + contacto.toString() + '}';
+      }
+
+      console.log(`Lista N°: ${this._idContactos} Contactos: ${contactoPersona}`);
+  }
+
+}
+
+let persona1 = new Persona('Cesar', 'Trujillo', 321, 'Mz 4 Cs 144');
+let persona2 = new Persona('Andy', 'Trujillo', 654, 'Mz 5 Cs 146');
+let persona3 = new Persona('Henry', 'Trujillo', 789, 'Mz 6 Cs 148');
+let persona4 = new Persona('Maria', 'Torres', 453, 'Mz 7 Cs 150');
+let persona5 = new Persona('Elicenia', 'Giraldo', 785, 'Mz 8 Cs 152');
+
+let contacto1 = new Contacto();
+contacto1.agregarContacto(persona1);
+contacto1.agregarContacto(persona2);
+contacto1.mostrarContactos();
+
+let contacto2 = new Contacto();
+contacto2.agregarContacto(persona3);
+contacto2.agregarContacto(persona4);
+contacto2.agregarContacto(persona5);
+contacto2.mostrarContactos();

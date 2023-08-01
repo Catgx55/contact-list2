@@ -79,6 +79,13 @@ class Contacto{
       }
   }
 
+  eliminarContacto(eliminar){
+    let index = this._contactos.indexOf(eliminar);
+    if(index !== -1){
+        this._contactos.splice(index, 1);
+    }
+}
+
   mostrarContactos(){
       let contactoPersona = '';
       for(let contacto of this._contactos){
@@ -105,4 +112,9 @@ let contacto2 = new Contacto();
 contacto2.agregarContacto(persona3);
 contacto2.agregarContacto(persona4);
 contacto2.agregarContacto(persona5);
+contacto2.mostrarContactos();
+
+contacto1.eliminarContacto(persona2);
+contacto1.mostrarContactos();
+contacto2.eliminarContacto(persona4);
 contacto2.mostrarContactos();

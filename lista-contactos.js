@@ -118,3 +118,8 @@ contacto1.eliminarContacto(persona2);
 contacto1.mostrarContactos();
 contacto2.eliminarContacto(persona4);
 contacto2.mostrarContactos();
+
+persona1._nombre = "Carlos"
+persona5._ubicacion = "Manzana 7 casa 150"
+contacto1.mostrarContactos();
+contacto2.mostrarContactos();
